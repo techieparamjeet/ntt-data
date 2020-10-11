@@ -1,0 +1,21 @@
+@import '~src/variables.scss'; 
+
+.mat-form-field {
+  font-size: 14px;
+}
+
+table {
+  width: 100%;
+
+  .mat-chip{
+    font-size: 12px;
+    padding: 2px 10px;
+    min-height: 20px;
+      &.is-active{
+          background-color: $active-chip-bg;
+      }
+      &.is-inactive{
+        background-color: $inactive-chip-bg;
+      }
+  }
+}

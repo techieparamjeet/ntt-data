@@ -1,0 +1,22 @@
+<h1 mat-dialog-title>Edit Enrollee</h1>
+<form class="enrollee-form" [formGroup]="enrolleeForm" (ngSubmit)="onEnrolleeSubmit()">
+    <mat-form-field class="full-width">
+        <mat-label>ID</mat-label>
+        <input matInput placeholder="ID" formControlName="id">
+    </mat-form-field>
+    <mat-form-field class="full-width">
+        <mat-label>Date of Birth</mat-label>
+        <input matInput placeholder="Date of Birth" formControlName="dateOfBirth">
+    </mat-form-field>
+    <mat-form-field class="full-width">
+        <mat-label>Name</mat-label>
+        <input matInput placeholder="name" formControlName="name">
+    </mat-form-field>
+    <mat-slide-toggle class="margin-2-b" formControlName="active">Active</mat-slide-toggle>
+    <div class="row">
+        <div class="col-sm-12">
+            <button mat-flat-button color="primary" type="submit" [disabled]="!enrolleeForm.valid">Update</button>
+            <button mat-flat-button type="button" (click)="cancelUpdate()">Cancel</button>
+        </div>
+    </div>
+</form>
