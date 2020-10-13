@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { DataService } from './../shared/services/data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { IEnrollee } from './../shared/interfaces/enrollee.interface';
+import { ErrorMessages } from './../shared/constants/error-messages';
 
 @Component({
   selector: 'app-edit-enrollee-dialog',
@@ -59,7 +60,7 @@ export class EditEnrolleeDialogComponent implements OnInit, OnDestroy {
         this.closeDialog();
       }
     }, (err) => {
-      this.openSnackBar('Error updating enrollee.', '');
+      this.openSnackBar(ErrorMessages.enrolleeUpdateError, '');
     });
   }
 

@@ -8,6 +8,7 @@ import { EditEnrolleeDialogComponent } from '../edit-enrollee-dialog/edit-enroll
 import { DataService } from './../shared/services/data.service';
 import { IEnrollee } from './../shared/interfaces/enrollee.interface';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ErrorMessages } from './../shared/constants/error-messages';
 
 @Component({
   selector: 'app-enrollees-list',
@@ -40,7 +41,7 @@ export class EnrolleesListComponent implements OnInit, OnDestroy {
         this.dataSource.sort = this.sort;
       }
     }, (err) => {
-      this.openSnackBar('Error getting enrollees.', '');
+      this.openSnackBar(ErrorMessages.enrolleeListError, '');
     });
   }
 
