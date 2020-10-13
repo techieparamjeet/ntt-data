@@ -1,25 +1,22 @@
 import { Injectable } from '@angular/core';
-import { environmentConfig } from './../../../environments/environment.prod';
 import { HttpClient } from '@angular/common/http';
-
-const environment = environmentConfig();
+import { Observable } from 'rxjs';
+import { environment } from './../../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
 
-  getEnrolleesUrl = environment.BASE_URL + 'enrollees';
+  getEnrolleesUrl = environment.apiPath + 'enrollees';
 
-  constructor(private http : HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  getEnrollees(){
+  getEnrollees(): Observable<any> {
     return this.http.get(this.getEnrolleesUrl);
   }
 
-  updateEnrollee(id, enrolleeObj){
+  updateEnrollee(id, enrolleeObj): Observable<any> {
     return this.http.put(this.getEnrolleesUrl + '/' + id, enrolleeObj);
   }
-
-
 }

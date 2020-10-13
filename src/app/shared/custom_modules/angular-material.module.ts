@@ -1,4 +1,4 @@
-import { NgModule } from "@angular/core";
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { MatIconModule } from '@angular/material/icon';
@@ -14,7 +14,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
-    imports : [
+    imports: [
         CommonModule,
         MatIconModule,
         MatToolbarModule,
@@ -28,7 +28,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
         MatSlideToggleModule,
         MatSnackBarModule
     ],
-    exports : [
+    exports: [
         MatIconModule,
         MatToolbarModule,
         MatButtonModule,
@@ -43,4 +43,4 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     ]
 })
 
-export class AngularMaterialModule {}
+export class AngularMaterialModule { }

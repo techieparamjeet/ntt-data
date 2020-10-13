@@ -42,5 +42,23 @@ body {
         cursor: pointer;
     }
 
+    /*** Material radio custom styling ***/
+
+    .active-toggle{
+        &.mat-checked{
+            .mat-slide-toggle-bar{
+                background-color: rgba(0,255,0,.54);
+                .mat-slide-toggle-thumb{
+                    background-color: rgb(0,128,0);
+                }
+            }
+        }
+        .mat-slide-toggle-bar{
+            background-color: rgba(255,0,0,.54);
+            .mat-slide-toggle-thumb{
+                background-color: rgb(255,0,0);
+            }
+        }
+    }
 
 }

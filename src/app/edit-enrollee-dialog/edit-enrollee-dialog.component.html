@@ -6,17 +6,17 @@
     </mat-form-field>
     <mat-form-field class="full-width">
         <mat-label>Date of Birth</mat-label>
-        <input matInput placeholder="Date of Birth" formControlName="dateOfBirth">
+        <input matInput placeholder="e.g. 1991-01-28" formControlName="dateOfBirth">
     </mat-form-field>
     <mat-form-field class="full-width">
         <mat-label>Name</mat-label>
         <input matInput placeholder="name" formControlName="name">
     </mat-form-field>
-    <mat-slide-toggle class="margin-2-b" formControlName="active">Active</mat-slide-toggle>
+    <mat-slide-toggle class="margin-2-b active-toggle" formControlName="active">Active</mat-slide-toggle>
     <div class="row">
         <div class="col-sm-12">
             <button mat-flat-button color="primary" type="submit" [disabled]="!enrolleeForm.valid">Update</button>
-            <button mat-flat-button type="button" (click)="cancelUpdate()">Cancel</button>
+            <button mat-flat-button type="button" (click)="closeDialog()">Cancel</button>
         </div>
     </div>
 </form>

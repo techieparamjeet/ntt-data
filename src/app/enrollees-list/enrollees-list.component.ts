@@ -6,13 +6,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import { EditEnrolleeDialogComponent } from '../edit-enrollee-dialog/edit-enrollee-dialog.component';
 import { DataService } from './../shared/services/data.service';
-
-export interface UserData {
-  id: string;
-  active: boolean;
-  name: string;
-  dateOfBirth: string;
-}
+import { IEnrollee } from './../shared/interfaces/enrollee.interface';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-enrollees-list',
@@ -21,34 +16,46 @@ export interface UserData {
 })
 export class EnrolleesListComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = ['id', 'active', 'name', 'dateOfBirth', 'action'];
-  dataSource: MatTableDataSource<UserData>;
-  getEnrolleeSub : Subscription;
+  dataSource: MatTableDataSource<IEnrollee>;
+  getEnrolleeSub: Subscription;
 
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-  constructor(private dataService : DataService, public dialog: MatDialog) {}
+  constructor(
+    private dataService: DataService,
+    public dialog: MatDialog,
+    private snackBar: MatSnackBar) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.getEnrolleesList();
   }
 
-  //get enrollee list from API
-  getEnrolleesList(){
-    this.getEnrolleeSub = this.dataService.getEnrollees().subscribe((res : UserData[])=>{
-      if(res){
+  // get enrollee list from API
+  getEnrolleesList(): void {
+    this.getEnrolleeSub = this.dataService.getEnrollees().subscribe((res: IEnrollee[]) => {
+      if (res) {
         this.dataSource = new MatTableDataSource(res);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       }
-    })
+    }, (err) => {
+      this.openSnackBar('Error getting enrollees.', '');
+    });
   }
 
-  //Open edit enrollee dialog
-  editEnrollee(id){
-    const enrollee = this.dataSource.filteredData.filter((item)=>{
-      return item.id === id
-    })
+  // Shows snackbar
+  openSnackBar(message: string, action: string): void {
+    const snackbarRef = this.snackBar.open(message, action, {
+      duration: 3000
+    });
+  }
+
+  // Open edit enrollee dialog
+  editEnrollee(id): void {
+    const enrollee = this.dataSource.filteredData.filter((item) => {
+      return item.id === id;
+    });
 
     const dialogRef = this.dialog.open(EditEnrolleeDialogComponent, {
       width: '400px',
@@ -61,7 +68,7 @@ export class EnrolleesListComponent implements OnInit, OnDestroy {
   }
 
   // Filter values in table
-  applyFilter(event: Event) {
+  applyFilter(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
 
@@ -71,8 +78,8 @@ export class EnrolleesListComponent implements OnInit, OnDestroy {
   }
 
   // Unsubscribe the subscriptions
-  ngOnDestroy(){
-    if(this.getEnrolleeSub){
+  ngOnDestroy(): void {
+    if (this.getEnrolleeSub) {
       this.getEnrolleeSub.unsubscribe();
     }
   }
